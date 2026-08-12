@@ -1,18 +1,25 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require("dotenv").config();
 
 const authRoutes = require("./routes/authRoutes");
+const leaveRoutes = require("./routes/leaveRoutes");
 
 const app = express();
 
 
 // Middleware
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
 app.use(express.json());
 
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/leaves", leaveRoutes);
 
 
 // MongoDB Connection
